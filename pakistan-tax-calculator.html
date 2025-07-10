@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pakistan Tax Calculator 2025-2026 | Income Tax Calculator Pakistan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 20px;
+            font-size: 0.9rem;
+        }
+
+        .nav {
+            background-color: rgba(255,255,255,0.1);
+            padding: 0.5rem 0;
+        }
+
+        .nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: #ffd700;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .calculator-section {
+            background: white;
+            padding: 3rem 0;
+            margin: 2rem 0;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .calculator-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .calculator-form {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 2px solid #e9ecef;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
+        }
+
+        .results-container {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 5px solid #3498db;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .result-label {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .result-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #27ae60;
+        }
+
+        .tax-slabs {
+            background: white;
+            padding: 3rem 0;
+            margin: 2rem 0;
+        }
+
+        .tax-slabs h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #2c3e50;
+            font-size: 2rem;
+        }
+
+        .slabs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .slab-card {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(116, 185, 255, 0.3);
+            transition: transform 0.3s;
+        }
+
+        .slab-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .slab-range {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .slab-rate {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .services-section {
+            background: linear-gradient(135deg, #2d3436, #636e72);
+            color: white;
+            padding: 4rem 0;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #74b9ff;
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #74b9ff;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #74b9ff;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #34495e;
+            color: #95a5a6;
+        }
+
+        .year-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .year-btn {
+            padding: 8px 15px;
+            background: #ecf0f1;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .year-btn.active {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav ul {
+                gap: 15px;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 1rem 0;
+        }
+
+        .stars {
+            color: #ffd700;
+            font-size: 1.2rem;
+        }
+
+        .testimonials {
+            background: #f8f9fa;
+            padding: 3rem 0;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">PakTaxCalculator</div>
+                <div class="contact-info">
+                    <div>📧 help@paktaxcalculator.pk</div>
+                    <div>📞 +92 321 6306286</div>
+                </div>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#calculator">Tax Calculators</a></li>
+                    <li><a href="#slabs">Income Tax Slabs</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Calculate Salary Tax Instantly</h1>
+            <p>Use our FBR-approved online tax calculator to calculate your income and salary tax in Pakistan. Whether you're an individual or a company, our tool helps you get accurate annual tax estimates in seconds.</p>
+            <div class="rating">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <span>5.0 Google Rating Based On 492 Reviews</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="calculator-section" id="calculator">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 2rem; color: #2c3e50; font-size: 2rem;">Tax Calculator Pakistan 2025-2026</h2>
+            <p style="text-align: center; margin-bottom: 2rem; color: #7f8c8d;">This is latest tax calculator as per 2025-2026 budget presented by government of Pakistan.</p>
+            
+            <div class="year-selector" style="justify-content: center; margin-bottom: 2rem;">
+                <div class="year-btn active" onclick="selectYear('2025-2026')">2025-2026</div>
+                <div class="year-btn" onclick="selectYear('2024-2025')">2024-2025</div>
+                <div class="year-btn" onclick="selectYear('2023-2024')">2023-2024</div>
+                <div class="year-btn" onclick="selectYear('2022-2023')">2022-2023</div>
+                <div class="year-btn" onclick="selectYear('2021-2022')">2021-2022</div>
+            </div>
+
+            <div class="calculator-container">
+                <div class="calculator-form">
+                    <h3 style="margin-bottom: 1.5rem; color: #2c3e50;">Calculate Your Tax</h3>
+                    <div class="form-group">
+                        <label for="calculation-type">Calculation Type</label>
+                        <select id="calculation-type" onchange="toggleCalculationType()">
+                            <option value="monthly">Monthly</option>
+                            <option value="yearly">Yearly</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="income" id="income-label">Monthly Income (PKR)</label>
+                        <input type="number" id="income" placeholder="Enter your income" oninput="calculateTax()">
+                    </div>
+                    <div class="form-group">
+                        <label for="tax-year">Tax Year</label>
+                        <select id="tax-year">
+                            <option value="2025-2026">2025-2026</option>
+                            <option value="2024-2025">2024-2025</option>
+                            <option value="2023-2024">2023-2024</option>
+                        </select>
+                    </div>
+                    <button class="btn" onclick="calculateTax()">Calculate Tax</button>
+                </div>
+
+                <div class="results-container">
+                    <h3 style="margin-bottom: 1.5rem; color: #2c3e50;">Tax Calculation Results</h3>
+                    <div class="result-item">
+                        <span class="result-label" id="income-result-label">Monthly Income</span>
+                        <span class="result-value" id="income-result">PKR 0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label" id="tax-result-label">Monthly Tax</span>
+                        <span class="result-value" id="tax-result" style="color: #e74c3c;">PKR 0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label" id="after-tax-result-label">Salary After Tax</span>
+                        <span class="result-value" id="after-tax-result">PKR 0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label" id="yearly-income-result-label">Yearly Income</span>
+                        <span class="result-value" id="yearly-income-result">PKR 0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label" id="yearly-tax-result-label">Yearly Tax</span>
+                        <span class="result-value" id="yearly-tax-result" style="color: #e74c3c;">PKR 0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label" id="yearly-after-tax-result-label">Yearly Income After Tax</span>
+                        <span class="result-value" id="yearly-after-tax-result">PKR 0</span>
+                    </div>
+                    <div style="margin-top: 1rem; padding: 1rem; background: #e8f5e8; border-radius: 8px;">
+                        <h4 style="color: #27ae60; margin-bottom: 0.5rem;">Tax Slab Information</h4>
+                        <p id="tax-slab-info" style="color: #2c3e50; font-size: 0.9rem;">Enter your income to see applicable tax slab</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="tax-slabs" id="slabs">
+        <div class="container">
+            <h2>Salary Tax Slabs According to Budget 2025-26</h2>
+            <p style="text-align: center; color: #7f8c8d; margin-bottom: 2rem;">Progressive tax system with different rates for different income brackets</p>
+            
+            <div class="slabs-grid">
+                <div class="slab-card">
+                    <div class="slab-range">Up to PKR 600,000</div>
+                    <div class="slab-rate">0% Tax Rate</div>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.9;">No tax on annual salary income below 600K</p>
+                </div>
+                <div class="slab-card">
+                    <div class="slab-range">PKR 600,001 - 1,200,000</div>
+                    <div class="slab-rate">1% Tax Rate</div>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.9;">1% of amount exceeding PKR 600,000</p>
+                </div>
+                <div class="slab-card">
+                    <div class="slab-range">PKR 1,200,001 - 2,200,000</div>
+                    <div class="slab-rate">11% Tax Rate</div>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.9;">PKR 6,000 + 11% of amount exceeding PKR 1.2M</p>
+                </div>
+                <div class="slab-card">
+                    <div class="slab-range">PKR 2,200,001 - 3,200,000</div>
+                    <div class="slab-rate">23% Tax Rate</div>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.9;">PKR 116,000 + 23% of amount exceeding PKR 2.2M</p>
+                </div>
+                <div class="slab-card">
+                    <div class="slab-range">PKR 3,200,001 - 4,100,000</div>
+                    <div class="slab-rate">30% Tax Rate</div>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.9;">PKR 346,000 + 30% of amount exceeding PKR 3.2M</p>
+                </div>
+                <div class="slab-card">
+                    <div class="slab-range">Above PKR 4,100,000</div>
+                    <div class="slab-rate">35% Tax Rate</div>
+                    <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.9;">PKR 616,000 + 35% of amount exceeding PKR 4.1M</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services-section" id="services">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 2rem; font-size: 2rem;">Expert Business & Financial Services</h2>
+            <p style="text-align: center; margin-bottom: 2rem; opacity: 0.9;">Pak Tax Calculator provides a variety of financial and tax-related services</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🔍</div>
+                    <h3>Audit and Assurance</h3>
+                    <p>Professional audit and assurance services for businesses of all sizes</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>Accounting & Bookkeeping</h3>
+                    <p>Comprehensive accounting and bookkeeping solutions</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🏢</div>
+                    <h3>Company/Firm Registration</h3>
+                    <p>Complete company and firm registration services</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📄</div>
+                    <h3>Income Tax Filing</h3>
+                    <p>Expert income tax return filing services</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💼</div>
+                    <h3>Tax Consultancy</h3>
+                    <p>Professional tax consultancy and advisory services</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚖️</div>
+                    <h3>Corporate SECP Matters</h3>
+                    <p>Complete SECP compliance and legal services</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 2rem; color: #2c3e50;">What Our Clients Say</h2>
+            <p style="text-align: center; color: #7f8c8d; margin-bottom: 2rem;">Real feedback from individuals and businesses across Pakistan who simplified their tax process with us</p>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-avatar">SK</div>
+                    <h4>Sara Khan</h4>
+                    <p style="color: #7f8c8d; font-size: 0.9rem; margin: 0.5rem 0;">Financial Analyst</p>
+                    <p>"The platform is well-designed, accurate, and easy to use. As a financial analyst, I need precise calculations, and this tool ensures efficiency. Highly recommended!"</p>
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-avatar">SB</div>
+                    <h4>Syed Burhan Shah</h4>
+                    <p style="color: #7f8c8d; font-size: 0.9rem; margin: 0.5rem 0;">Senior Chartered Accountant</p>
+                    <p>"PakTaxCalculator.pk has made tax calculations effortless. The platform is highly accurate and incredibly user-friendly. Reliable, efficient!"</p>
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-avatar">FN</div>
+                    <h4>Fatima Nawaz</h4>
+                    <p style="color: #7f8c8d; font-size: 0.9rem; margin: 0.5rem 0;">Agricultural Entrepreneur</p>
+                    <p>"The platform is simple, fast, and extremely precise. Their expert tax advisory services have helped optimize finances. Essential for businesses."</p>
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Information</h3>
+                    <p>📧 help@paktaxcalculator.pk</p>
+                    <p>📞 +92 321 6306286</p>
+                    <p>🏢 Pakistan</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Our Services</h3>
+                    <ul>
+                        <li><a href="#">Audit and Assurance</a></li>
+                        <li><a href="#">Accounting & Bookkeeping</a></li>
+                        <li><a href="#">Company/Firm Registration</a></li>
+                        <li><a href="#">Income Tax Filing</a></li>
+                        <li><a href="#">Tax Consultancy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Calculators</h3>
+                    <ul>
+                        <li><a href="#">Salary Tax Calculator</a></li>
+                        <li><a href="#">Freelancer Tax Calculator</a></li>
+                        <li><a href="#">Business Tax Calculator</a></li>
+                        <li><a href="#">Super Tax Calculator</a></li>
+                        <li><a href="#">Agricultural Tax Calculator</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Useful Links</h3>
+                    <ul>
+                        <li><a href="#">Income Tax Slabs</a></li>
+                        <li><a href="#">About us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">FAQs</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Paktaxcalculator.pk All Rights Reserved.</p>
+                <p>Assisted over 500,000 individuals and businesses • Access to 21+ tax calculators & financial tools</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tax calculation logic based on Pakistan 2025-2026 tax slabs
+        function calculateTax() {
+            const incomeInput = document.getElementById('income');
+            const calculationType = document.getElementById('calculation-type').value;
+            let income = parseFloat(incomeInput.value) || 0;
+            
+            // Convert monthly to yearly if needed
+            let yearlyIncome = calculationType === 'monthly' ? income * 12 : income;
+            let monthlyIncome = calculationType === 'yearly' ? income / 12 : income;
+            
+            // Calculate yearly tax based on 2025-2026 slabs
+            let yearlyTax = 0;
+            let slabInfo = '';
+            
+            if (yearlyIncome <= 600000) {
+                yearlyTax = 0;
+                slabInfo = 'Tax Slab: Up to PKR 600,000 (0% tax rate)';
+            } else if (yearlyIncome <= 1200000) {
+                yearlyTax = (yearlyIncome - 600000) * 0.01;
+                slabInfo = 'Tax Slab: PKR 600,001 - 1,200,000 (1% tax rate)';
+            } else if (yearlyIncome <= 2200000) {
+                yearlyTax = 6000 + (yearlyIncome - 1200000) * 0.11;
+                slabInfo = 'Tax Slab: PKR 1,200,001 - 2,200,000 (11% tax rate)';
+            } else if (yearlyIncome <= 3200000) {
+                yearlyTax = 116000 + (yearlyIncome - 2200000) * 0.23;
+                slabInfo = 'Tax Slab: PKR 2,200,001 - 3,200,000 (23% tax rate)';
+            } else if (yearlyIncome <= 4100000) {
+                yearlyTax = 346000 + (yearlyIncome - 3200000) * 0.30;
+                slabInfo = 'Tax Slab: PKR 3,200,001 - 4,100,000 (30% tax rate)';
+            } else {
+                yearlyTax = 616000 + (yearlyIncome - 4100000) * 0.35;
+                slabInfo = 'Tax Slab: Above PKR 4,100,000 (35% tax rate)';
+            }
+            
+            let monthlyTax = yearlyTax / 12;
+            
+            // Update results
+            document.getElementById('income-result').textContent = formatCurrency(monthlyIncome);
+            document.getElementById('tax-result').textContent = formatCurrency(monthlyTax);
+            document.getElementById('after-tax-result').textContent = formatCurrency(monthlyIncome - monthlyTax);
+            document.getElementById('yearly-income-result').textContent = formatCurrency(yearlyIncome);
+            document.getElementById('yearly-tax-result').textContent = formatCurrency(yearlyTax);
+            document.getElementById('yearly-after-tax-result').textContent = formatCurrency(yearlyIncome - yearlyTax);
+            document.getElementById('tax-slab-info').textContent = slabInfo;
+        }
+        
+        function formatCurrency(amount) {
+            return 'PKR ' + Math.round(amount).toLocaleString();
+        }
+        
+        function toggleCalculationType() {
+            const calculationType = document.getElementById('calculation-type').value;
+            const incomeLabel = document.getElementById('income-label');
+            const incomeInput = document.getElementById('income');
+            
+            if (calculationType === 'monthly') {
+                incomeLabel.textContent = 'Monthly Income (PKR)';
+                incomeInput.placeholder = 'Enter your monthly income';
+            } else {
+                incomeLabel.textContent = 'Yearly Income (PKR)';
+                incomeInput.placeholder = 'Enter your yearly income';
+            }
+            
+            // Clear input and recalculate
+            incomeInput.value = '';
+            calculateTax();
+        }
+        
+        function selectYear(year) {
+            // Remove active class from all year buttons
+            document.querySelectorAll('.year-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Add active class to selected year
+            event.target.classList.add('active');
+            
+            // Update tax year select
+            document.getElementById('tax-year').value = year;
+            
+            // Recalculate with new year (in real implementation, this would use different tax slabs)
+            calculateTax();
+        }
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Initialize calculator
+        document.addEventListener('DOMContentLoaded', function() {
+            calculateTax();
+        });
+    </script>
+</body>
+</html>
