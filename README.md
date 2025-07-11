@@ -5,7 +5,7 @@ A comprehensive salary tax calculator inspired by befiler.com, designed for Paki
 ## 🌟 Features
 
 ### Core Functionality
-- **Multi-Year Support**: Calculate taxes for current year (2024-25) and previous two years (2023-24, 2022-23)
+- **Multi-Year Support**: Calculate taxes for current year (2025-26) and previous two years (2024-25, 2023-24)
 - **Real-time Calculations**: Instant tax calculations as you switch between years
 - **Comprehensive Results**: Shows both monthly and yearly breakdowns
 - **Detailed Breakdown**: Complete tax slab breakdown with amounts
@@ -24,7 +24,7 @@ A comprehensive salary tax calculator inspired by befiler.com, designed for Paki
 
 ## 📊 Tax Year Support
 
-### 2024-25 Tax Brackets (Current Year)
+### 2025-26 Tax Brackets (Current Year)
 - Rs 0 - Rs 600,000: 0%
 - Rs 600,001 - Rs 1,200,000: 5%
 - Rs 1,200,001 - Rs 2,200,000: 15%
@@ -32,16 +32,11 @@ A comprehensive salary tax calculator inspired by befiler.com, designed for Paki
 - Rs 3,200,001 - Rs 4,100,000: 30%
 - Above Rs 4,100,000: 35%
 
-### 2023-24 Tax Brackets
-- Same as 2024-25 (rates remained consistent)
+### 2024-25 Tax Brackets
+- Same as 2025-26 (rates remained consistent)
 
-### 2022-23 Tax Brackets
-- Rs 0 - Rs 600,000: 0%
-- Rs 600,001 - Rs 1,200,000: 2.5%
-- Rs 1,200,001 - Rs 2,400,000: 12.5%
-- Rs 2,400,001 - Rs 3,600,000: 20%
-- Rs 3,600,001 - Rs 6,000,000: 25%
-- Above Rs 6,000,000: 35%
+### 2023-24 Tax Brackets
+- Same as 2025-26 (rates remained consistent)
 
 ## 🚀 Quick Start
 
@@ -125,7 +120,7 @@ Currently set to Pakistani Rupees (Rs). To change:
 
 ## 📋 Usage Instructions
 
-1. **Select Tax Year**: Choose from 2024-25, 2023-24, or 2022-23
+1. **Select Tax Year**: Choose from 2025-26, 2024-25, or 2023-24
 2. **Enter Salary**: Input your monthly salary in the text field
 3. **Calculate**: Click "Calculate Tax" or press Enter
 4. **View Results**: See monthly/yearly tax and take-home amounts

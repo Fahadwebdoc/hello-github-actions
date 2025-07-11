@@ -193,7 +193,7 @@ Add meta tags for better search visibility:
 
 ```html
 <head>
-    <meta name="description" content="Free Pakistan salary tax calculator for 2024-25. Calculate income tax, take-home salary with detailed breakdown.">
+    <meta name="description" content="Free Pakistan salary tax calculator for 2025-26. Calculate income tax, take-home salary with detailed breakdown.">
     <meta name="keywords" content="salary calculator, tax calculator, Pakistan tax, income tax">
     <meta property="og:title" content="Salary Tax Calculator - Pakistan">
     <meta property="og:description" content="Calculate your income tax and take-home salary instantly">
