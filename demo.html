@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary Tax Calculator - Demo</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f7fa;
+        }
+        
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #4f46e5;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #6b7280;
+            font-size: 1.1rem;
+        }
+        
+        .demo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .demo-section {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .demo-section h2 {
+            color: #4f46e5;
+            margin-bottom: 15px;
+        }
+        
+        .calculator-container {
+            grid-column: 1 / -1;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .example-calculations {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 15px 0;
+        }
+        
+        .example-calculations h3 {
+            color: #374151;
+            margin-bottom: 10px;
+        }
+        
+        .example-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .example-item:last-child {
+            border-bottom: none;
+        }
+        
+        .integration-code {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+        
+        .features-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .features-list li {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .features-list li::before {
+            content: "✅";
+            margin-right: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="header">
+            <h1>Salary Tax Calculator Demo</h1>
+            <p>Experience the power of accurate tax calculations with multi-year support</p>
+        </div>
+        
+        <div class="demo-grid">
+            <div class="demo-section">
+                <h2>🌟 Key Features</h2>
+                <ul class="features-list">
+                    <li>Multi-year tax calculation (2022-23 to 2024-25)</li>
+                    <li>Real-time calculations</li>
+                    <li>Mobile responsive design</li>
+                    <li>Detailed tax breakdown</li>
+                    <li>No registration required</li>
+                    <li>Offline capable</li>
+                    <li>Easy integration</li>
+                </ul>
+            </div>
+            
+            <div class="demo-section">
+                <h2>📊 Example Calculations</h2>
+                <div class="example-calculations">
+                    <h3>Monthly Salary: Rs 100,000</h3>
+                    <div class="example-item">
+                        <span>2024-25 Tax:</span>
+                        <strong>Rs 15,000/month</strong>
+                    </div>
+                    <div class="example-item">
+                        <span>Take-home:</span>
+                        <strong>Rs 85,000/month</strong>
+                    </div>
+                </div>
+                
+                <div class="example-calculations">
+                    <h3>Monthly Salary: Rs 200,000</h3>
+                    <div class="example-item">
+                        <span>2024-25 Tax:</span>
+                        <strong>Rs 40,000/month</strong>
+                    </div>
+                    <div class="example-item">
+                        <span>Take-home:</span>
+                        <strong>Rs 160,000/month</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="calculator-container">
+            <iframe src="salary-tax-calculator.html" width="100%" height="900px" frameborder="0" style="border-radius: 15px;"></iframe>
+        </div>
+        
+        <div class="demo-grid">
+            <div class="demo-section">
+                <h2>🚀 Quick Integration</h2>
+                <p>Add this calculator to your website in just a few steps:</p>
+                
+                <h3>Option 1: Direct Link</h3>
+                <div class="integration-code">
+&lt;a href="salary-tax-calculator.html"&gt;Tax Calculator&lt;/a&gt;
+                </div>
+                
+                <h3>Option 2: Iframe Embed</h3>
+                <div class="integration-code">
+&lt;iframe src="salary-tax-calculator.html" 
+        width="100%" 
+        height="800px" 
+        frameborder="0"&gt;
+&lt;/iframe&gt;
+                </div>
+            </div>
+            
+            <div class="demo-section">
+                <h2>💻 Technical Specs</h2>
+                <ul class="features-list">
+                    <li>Pure HTML, CSS, JavaScript</li>
+                    <li>No external dependencies</li>
+                    <li>Client-side calculations</li>
+                    <li>Lightweight (~50KB)</li>
+                    <li>Cross-browser compatible</li>
+                    <li>SEO friendly</li>
+                    <li>Secure (no data transmission)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>📋 How It Compares</h2>
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="background: #f8fafc;">
+                        <th style="padding: 12px; text-align: left; border: 1px solid #e5e7eb;">Feature</th>
+                        <th style="padding: 12px; text-align: left; border: 1px solid #e5e7eb;">This Calculator</th>
+                        <th style="padding: 12px; text-align: left; border: 1px solid #e5e7eb;">Befiler.com</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #e5e7eb;">Year Selection</td>
+                        <td style="padding: 12px; border: 1px solid #e5e7eb;">✅ 3 Years</td>
+                        <td style="padding: 12px; border: 1px solid #e5e7eb;">✅ Multiple Years</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #e5e7eb;">Detailed Breakdown</td>
+                        <td style="padding: 12px; border: 1px solid #e5e7eb;">✅ Complete Table</td>
+                        <td style="padding: 12px; border: 1px solid #e5e7eb;">❌ Basic Only</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #e5e7eb;">Registration Required</td>
+                        <td style="padding: 12px; border: 1px solid #e5e7eb;">✅ No</td>
+                        <td style="padding: 12px; border: 1px solid #e5e7eb;">❌ Yes</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #e5e7eb;">Modern UI</td>
+                        <td style="padding: 12px; border: 1px solid #e5e7eb;">✅ Yes</td>
+                        <td style="padding: 12px; border: 1px solid #e5e7eb;">❌ Basic</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #e5e7eb;">Offline Usage</td>
+                        <td style="padding: 12px; border: 1px solid #e5e7eb;">✅ Yes</td>
+                        <td style="padding: 12px; border: 1px solid #e5e7eb;">❌ No</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
