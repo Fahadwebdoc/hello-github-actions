@@ -297,11 +297,11 @@
         }
 
         .year-btn.active {
-            background: linear-gradient(135deg, #059669 0%, #047857 100%);
-            color: white;
-            border-color: #059669;
+            background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
+            color: white !important;
+            border-color: #059669 !important;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(5, 150, 105, 0.3);
+            box-shadow: 0 8px 20px rgba(5, 150, 105, 0.3) !important;
         }
 
         .year-btn:hover {
@@ -480,22 +480,36 @@
         };
 
         // Year selection functionality
-        document.querySelectorAll('.year-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.year-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                selectedYear = this.dataset.year;
-                
-                // Update year display
-                document.getElementById('selectedYearDisplay').textContent = selectedYear;
-                
-                // Recalculate if salary is entered
-                const salary = document.getElementById('salary').value;
-                if (salary) {
-                    calculateTax();
-                }
+        function initializeYearSelection() {
+            document.querySelectorAll('.year-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    console.log('Year button clicked:', this.dataset.year); // Debug log
+                    
+                    // Remove active class from all buttons
+                    document.querySelectorAll('.year-btn').forEach(b => b.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Update selected year
+                    selectedYear = this.dataset.year;
+                    console.log('Selected year updated to:', selectedYear); // Debug log
+                    
+                    // Update year display in results
+                    const yearDisplay = document.getElementById('selectedYearDisplay');
+                    if (yearDisplay) {
+                        yearDisplay.textContent = selectedYear;
+                    }
+                    
+                    // Recalculate if salary is entered
+                    const salaryInput = document.getElementById('salary');
+                    if (salaryInput && salaryInput.value && salaryInput.value.trim() !== '') {
+                        console.log('Recalculating for new year...'); // Debug log
+                        calculateTax();
+                    }
+                });
             });
-        });
+        }
 
         function calculateTax() {
             const monthlySalary = parseFloat(document.getElementById('salary').value);
@@ -504,6 +518,14 @@
                 alert('Please enter a valid monthly salary');
                 return;
             }
+
+            // Ensure we have a valid selected year
+            if (!selectedYear || !taxBrackets[selectedYear]) {
+                console.error('Invalid selected year:', selectedYear);
+                selectedYear = '2025-26'; // Default fallback
+            }
+
+            console.log('Calculating tax for year:', selectedYear, 'Salary:', monthlySalary); // Debug log
 
             const yearlySalary = monthlySalary * 12;
             const brackets = taxBrackets[selectedYear];
@@ -593,6 +615,15 @@
                 calculateTax();
             }
         });
+
+        // Backup initialization if DOMContentLoaded already fired
+        if (document.readyState === 'loading') {
+            // DOM is still loading
+            document.addEventListener('DOMContentLoaded', initializeYearSelection);
+        } else {
+            // DOM already loaded
+            initializeYearSelection();
+        }
     </script>
 </body>
 </html>
