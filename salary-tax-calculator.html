@@ -384,9 +384,9 @@
             <div class="form-group">
                 <label>Select Tax Year</label>
                 <div class="year-selector">
-                    <div class="year-btn active" data-year="2025-26">2025-26</div>
-                    <div class="year-btn" data-year="2024-25">2024-25</div>
-                    <div class="year-btn" data-year="2023-24">2023-24</div>
+                    <div class="year-btn active" data-year="2025-26" onclick="selectYear('2025-26', this)">2025-26</div>
+                    <div class="year-btn" data-year="2024-25" onclick="selectYear('2024-25', this)">2024-25</div>
+                    <div class="year-btn" data-year="2023-24" onclick="selectYear('2023-24', this)">2023-24</div>
                 </div>
             </div>
 
@@ -479,36 +479,34 @@
             ]
         };
 
-        // Year selection functionality
-        function initializeYearSelection() {
+        // Simple year selection function
+        function selectYear(year, clickedButton) {
+            console.log('Year selected:', year); // Debug log
+            
+            // Remove active class from all year buttons
             document.querySelectorAll('.year-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    console.log('Year button clicked:', this.dataset.year); // Debug log
-                    
-                    // Remove active class from all buttons
-                    document.querySelectorAll('.year-btn').forEach(b => b.classList.remove('active'));
-                    
-                    // Add active class to clicked button
-                    this.classList.add('active');
-                    
-                    // Update selected year
-                    selectedYear = this.dataset.year;
-                    console.log('Selected year updated to:', selectedYear); // Debug log
-                    
-                    // Update year display in results
-                    const yearDisplay = document.getElementById('selectedYearDisplay');
-                    if (yearDisplay) {
-                        yearDisplay.textContent = selectedYear;
-                    }
-                    
-                    // Recalculate if salary is entered
-                    const salaryInput = document.getElementById('salary');
-                    if (salaryInput && salaryInput.value && salaryInput.value.trim() !== '') {
-                        console.log('Recalculating for new year...'); // Debug log
-                        calculateTax();
-                    }
-                });
+                btn.classList.remove('active');
             });
+            
+            // Add active class to clicked button
+            clickedButton.classList.add('active');
+            
+            // Update selected year
+            selectedYear = year;
+            console.log('Selected year updated to:', selectedYear); // Debug log
+            
+            // Update year display in results table
+            const yearDisplay = document.getElementById('selectedYearDisplay');
+            if (yearDisplay) {
+                yearDisplay.textContent = selectedYear;
+            }
+            
+            // If there's a salary entered, recalculate immediately
+            const salaryInput = document.getElementById('salary');
+            if (salaryInput && salaryInput.value && salaryInput.value.trim() !== '') {
+                console.log('Recalculating for new year:', selectedYear); // Debug log
+                calculateTax();
+            }
         }
 
         function calculateTax() {
@@ -615,15 +613,6 @@
                 calculateTax();
             }
         });
-
-        // Backup initialization if DOMContentLoaded already fired
-        if (document.readyState === 'loading') {
-            // DOM is still loading
-            document.addEventListener('DOMContentLoaded', initializeYearSelection);
-        } else {
-            // DOM already loaded
-            initializeYearSelection();
-        }
     </script>
 </body>
 </html>
