@@ -332,7 +332,7 @@
                 </div>
 
                 <div class="breakdown-table">
-                    <h3>Tax Calculation Breakdown</h3>
+                    <h3>Tax Calculation Breakdown - <span id="selectedYearDisplay">2025-26</span></h3>
                     <table class="table">
                         <thead>
                             <tr>
@@ -361,28 +361,28 @@
         // Tax brackets for different years
         const taxBrackets = {
             '2025-26': [
-                { min: 0, max: 600000, rate: 0, fixedTax: 0 },
-                { min: 600001, max: 1200000, rate: 1, fixedTax: 0 },
-                { min: 1200001, max: 2200000, rate: 11, fixedTax: 6000 },
-                { min: 2200001, max: 3200000, rate: 23, fixedTax: 116000 },
-                { min: 3200001, max: 4100000, rate: 30, fixedTax: 346000 },
-                { min: 4100001, max: Infinity, rate: 35, fixedTax: 616000 }
+                { min: 0, max: 600000, rate: 0 },
+                { min: 600000, max: 1200000, rate: 1 },
+                { min: 1200000, max: 2200000, rate: 11 },
+                { min: 2200000, max: 3200000, rate: 23 },
+                { min: 3200000, max: 4100000, rate: 30 },
+                { min: 4100000, max: Infinity, rate: 35 }
             ],
             '2024-25': [
-                { min: 0, max: 600000, rate: 0, fixedTax: 0 },
-                { min: 600001, max: 1200000, rate: 5, fixedTax: 0 },
-                { min: 1200001, max: 2200000, rate: 15, fixedTax: 30000 },
-                { min: 2200001, max: 3200000, rate: 25, fixedTax: 180000 },
-                { min: 3200001, max: 4100000, rate: 30, fixedTax: 430000 },
-                { min: 4100001, max: Infinity, rate: 35, fixedTax: 700000 }
+                { min: 0, max: 600000, rate: 0 },
+                { min: 600000, max: 1200000, rate: 5 },
+                { min: 1200000, max: 2200000, rate: 15 },
+                { min: 2200000, max: 3200000, rate: 25 },
+                { min: 3200000, max: 4100000, rate: 30 },
+                { min: 4100000, max: Infinity, rate: 35 }
             ],
             '2023-24': [
-                { min: 0, max: 600000, rate: 0, fixedTax: 0 },
-                { min: 600001, max: 1200000, rate: 2.5, fixedTax: 0 },
-                { min: 1200001, max: 2400000, rate: 12.5, fixedTax: 15000 },
-                { min: 2400001, max: 3600000, rate: 22.5, fixedTax: 165000 },
-                { min: 3600001, max: 6000000, rate: 27.5, fixedTax: 435000 },
-                { min: 6000001, max: Infinity, rate: 35, fixedTax: 1095000 }
+                { min: 0, max: 600000, rate: 0 },
+                { min: 600000, max: 1200000, rate: 2.5 },
+                { min: 1200000, max: 2400000, rate: 12.5 },
+                { min: 2400000, max: 3600000, rate: 22.5 },
+                { min: 3600000, max: 6000000, rate: 27.5 },
+                { min: 6000000, max: Infinity, rate: 35 }
             ]
         };
 
@@ -392,6 +392,9 @@
                 document.querySelectorAll('.year-btn').forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
                 selectedYear = this.dataset.year;
+                
+                // Update year display
+                document.getElementById('selectedYearDisplay').textContent = selectedYear;
                 
                 // Recalculate if salary is entered
                 const salary = document.getElementById('salary').value;
@@ -415,49 +418,35 @@
             let totalTax = 0;
             let breakdownData = [];
 
-            // Find the applicable bracket and calculate tax
-            for (let i = 0; i < brackets.length; i++) {
-                const bracket = brackets[i];
-                
-                if (yearlySalary > bracket.max) {
-                    // Income exceeds this bracket, move to next
-                    continue;
-                } else {
-                    // This is the applicable bracket
-                    if (yearlySalary <= bracket.min) {
-                        totalTax = 0;
-                    } else {
-                        const excessAmount = yearlySalary - bracket.min;
-                        totalTax = bracket.fixedTax + (excessAmount * bracket.rate / 100);
-                    }
-                    break;
-                }
-            }
-
-            // Create breakdown for display
+            // Calculate progressive tax
             for (let i = 0; i < brackets.length; i++) {
                 const bracket = brackets[i];
                 
                 if (yearlySalary > bracket.min) {
+                    // Calculate tax for this bracket
+                    const taxableInThisBracket = Math.min(yearlySalary, bracket.max) - bracket.min;
+                    const taxInThisBracket = taxableInThisBracket * bracket.rate / 100;
+                    
+                    // Add to total tax
+                    totalTax += taxInThisBracket;
+                    
+                    // Add to breakdown for display
                     const slabMin = bracket.min.toLocaleString();
                     const slabMax = bracket.max === Infinity ? 'and above' : bracket.max.toLocaleString();
                     const slabDescription = bracket.max === Infinity ? 
                         `Rs ${slabMin} and above` : 
                         `Rs ${slabMin} - Rs ${slabMax}`;
                     
-                    let slabTax = 0;
-                    if (yearlySalary > bracket.min) {
-                        const taxableInThisSlab = Math.min(yearlySalary, bracket.max) - bracket.min;
-                        slabTax = taxableInThisSlab * bracket.rate / 100;
-                    }
-                    
                     breakdownData.push({
                         slab: slabDescription,
                         rate: bracket.rate + '%',
-                        amount: 'Rs ' + Math.round(slabTax).toLocaleString()
+                        amount: 'Rs ' + Math.round(taxInThisBracket).toLocaleString()
                     });
                     
-                    if (yearlySalary <= bracket.max) break;
+                    // If income is within this bracket, stop
+                    if (yearlySalary <= bracket.max) {
+                        break;
+                    }
                 }
             }
 
