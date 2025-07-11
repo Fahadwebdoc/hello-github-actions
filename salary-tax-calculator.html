@@ -362,11 +362,11 @@
         const taxBrackets = {
             '2025-26': [
                 { min: 0, max: 600000, rate: 0, fixedTax: 0 },
-                { min: 600001, max: 1200000, rate: 5, fixedTax: 0 },
-                { min: 1200001, max: 2200000, rate: 15, fixedTax: 30000 },
-                { min: 2200001, max: 3200000, rate: 25, fixedTax: 180000 },
-                { min: 3200001, max: 4100000, rate: 30, fixedTax: 430000 },
-                { min: 4100001, max: Infinity, rate: 35, fixedTax: 700000 }
+                { min: 600001, max: 1200000, rate: 1, fixedTax: 0 },
+                { min: 1200001, max: 2200000, rate: 11, fixedTax: 6000 },
+                { min: 2200001, max: 3200000, rate: 23, fixedTax: 116000 },
+                { min: 3200001, max: 4100000, rate: 30, fixedTax: 346000 },
+                { min: 4100001, max: Infinity, rate: 35, fixedTax: 616000 }
             ],
             '2024-25': [
                 { min: 0, max: 600000, rate: 0, fixedTax: 0 },
@@ -378,11 +378,11 @@
             ],
             '2023-24': [
                 { min: 0, max: 600000, rate: 0, fixedTax: 0 },
-                { min: 600001, max: 1200000, rate: 5, fixedTax: 0 },
-                { min: 1200001, max: 2200000, rate: 15, fixedTax: 30000 },
-                { min: 2200001, max: 3200000, rate: 25, fixedTax: 180000 },
-                { min: 3200001, max: 4100000, rate: 30, fixedTax: 430000 },
-                { min: 4100001, max: Infinity, rate: 35, fixedTax: 700000 }
+                { min: 600001, max: 1200000, rate: 2.5, fixedTax: 0 },
+                { min: 1200001, max: 2400000, rate: 12.5, fixedTax: 15000 },
+                { min: 2400001, max: 3600000, rate: 22.5, fixedTax: 165000 },
+                { min: 3600001, max: 6000000, rate: 27.5, fixedTax: 435000 },
+                { min: 6000001, max: Infinity, rate: 35, fixedTax: 1095000 }
             ]
         };
 
@@ -415,36 +415,49 @@
             let totalTax = 0;
             let breakdownData = [];
 
+            // Find the applicable bracket and calculate tax
+            for (let i = 0; i < brackets.length; i++) {
+                const bracket = brackets[i];
+                
+                if (yearlySalary > bracket.max) {
+                    // Income exceeds this bracket, move to next
+                    continue;
+                } else {
+                    // This is the applicable bracket
+                    if (yearlySalary <= bracket.min) {
+                        totalTax = 0;
+                    } else {
+                        const excessAmount = yearlySalary - bracket.min;
+                        totalTax = bracket.fixedTax + (excessAmount * bracket.rate / 100);
+                    }
+                    break;
+                }
+            }
+
+            // Create breakdown for display
             for (let i = 0; i < brackets.length; i++) {
                 const bracket = brackets[i];
                 
                 if (yearlySalary > bracket.min) {
-                    const taxableAmount = Math.min(yearlySalary, bracket.max) - bracket.min + 1;
-                    const slabTax = (taxableAmount * bracket.rate / 100) + bracket.fixedTax;
+                    const slabMin = bracket.min.toLocaleString();
+                    const slabMax = bracket.max === Infinity ? 'and above' : bracket.max.toLocaleString();
+                    const slabDescription = bracket.max === Infinity ? 
+                        `Rs ${slabMin} and above` : 
+                        `Rs ${slabMin} - Rs ${slabMax}`;
                     
-                    if (i === 0) {
-                        totalTax = bracket.fixedTax;
-                    } else {
-                        const excessAmount = Math.min(yearlySalary - bracket.min + 1, bracket.max - bracket.min + 1);
-                        const variableTax = excessAmount * bracket.rate / 100;
-                        totalTax = bracket.fixedTax + variableTax;
+                    let slabTax = 0;
+                    if (yearlySalary > bracket.min) {
+                        const taxableInThisSlab = Math.min(yearlySalary, bracket.max) - bracket.min;
+                        slabTax = taxableInThisSlab * bracket.rate / 100;
                     }
-
-                    if (yearlySalary >= bracket.min) {
-                        const slabMin = bracket.min.toLocaleString();
-                        const slabMax = bracket.max === Infinity ? 'and above' : bracket.max.toLocaleString();
-                        const slabDescription = bracket.max === Infinity ? 
-                            `Rs ${slabMin} and above` : 
-                            `Rs ${slabMin} - Rs ${slabMax}`;
-                        
-                        breakdownData.push({
-                            slab: slabDescription,
-                            rate: bracket.rate + '%',
-                            amount: 'Rs ' + Math.round(i === 0 ? 0 : (Math.min(yearlySalary - bracket.min + 1, bracket.max - bracket.min + 1) * bracket.rate / 100)).toLocaleString()
-                        });
-                        
-                        if (yearlySalary <= bracket.max) break;
-                    }
+                    
+                    breakdownData.push({
+                        slab: slabDescription,
+                        rate: bracket.rate + '%',
+                        amount: 'Rs ' + Math.round(slabTax).toLocaleString()
+                    });
+                    
+                    if (yearlySalary <= bracket.max) break;
                 }
             }
 

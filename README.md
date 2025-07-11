@@ -18,25 +18,45 @@ A comprehensive salary tax calculator inspired by befiler.com, designed for Paki
 
 ### Tax Calculations
 - **Accurate Tax Rates**: Based on official Pakistani tax brackets for salaried individuals
-- **Progressive Tax System**: Correctly implements progressive tax calculation
+- **Progressive Tax System**: Correctly implements progressive tax calculation with fixed tax components
 - **Multiple Display Formats**: Shows amounts in both monthly and yearly formats
 - **Detailed Breakdown Table**: Shows tax calculation for each income slab
+- **Year-Specific Calculations**: Each year has significantly different rates - 2025-26 offers substantial relief
 
 ## 📊 Tax Year Support
 
 ### 2025-26 Tax Brackets (Current Year)
-- Rs 0 - Rs 600,000: 0%
-- Rs 600,001 - Rs 1,200,000: 5%
-- Rs 1,200,001 - Rs 2,200,000: 15%
-- Rs 2,200,001 - Rs 3,200,000: 25%
-- Rs 3,200,001 - Rs 4,100,000: 30%
-- Above Rs 4,100,000: 35%
+- Rs 0 - Rs 600,000: **0%**
+- Rs 600,001 - Rs 1,200,000: **1%** (Rs 6,000 max)
+- Rs 1,200,001 - Rs 2,200,000: **11%** + Rs 6,000
+- Rs 2,200,001 - Rs 3,200,000: **23%** + Rs 116,000
+- Rs 3,200,001 - Rs 4,100,000: **30%** + Rs 346,000
+- Above Rs 4,100,000: **35%** + Rs 616,000
 
 ### 2024-25 Tax Brackets
-- Same as 2025-26 (rates remained consistent)
+- Rs 0 - Rs 600,000: **0%**
+- Rs 600,001 - Rs 1,200,000: **5%** (Rs 30,000 max)
+- Rs 1,200,001 - Rs 2,200,000: **15%** + Rs 30,000
+- Rs 2,200,001 - Rs 3,200,000: **25%** + Rs 180,000
+- Rs 3,200,001 - Rs 4,100,000: **30%** + Rs 430,000
+- Above Rs 4,100,000: **35%** + Rs 700,000
 
 ### 2023-24 Tax Brackets
-- Same as 2025-26 (rates remained consistent)
+- Rs 0 - Rs 600,000: **0%**
+- Rs 600,001 - Rs 1,200,000: **2.5%** (Rs 15,000 max)
+- Rs 1,200,001 - Rs 2,400,000: **12.5%** + Rs 15,000
+- Rs 2,400,001 - Rs 3,600,000: **22.5%** + Rs 165,000
+- Rs 3,600,001 - Rs 6,000,000: **27.5%** + Rs 435,000
+- Above Rs 6,000,000: **35%** + Rs 1,095,000
+
+### 💰 Tax Relief Comparison (2025-26 vs 2024-25)
+| Monthly Salary | 2024-25 Tax | 2025-26 Tax | Monthly Savings |
+|----------------|-------------|-------------|-----------------|
+| Rs 100,000     | Rs 2,500    | Rs 500      | **Rs 2,000**    |
+| Rs 200,000     | Rs 20,000   | Rs 11,833   | **Rs 8,167**    |
+| Rs 300,000     | Rs 40,000   | Rs 27,500   | **Rs 12,500**   |
+
+*The 2025-26 tax year provides significant relief across all income brackets!*
 
 ## 🚀 Quick Start
 
@@ -140,12 +160,14 @@ Currently set to Pakistani Rupees (Rs). To change:
 ## 🚨 Important Notes
 
 - This calculator is designed for **salaried individuals** in Pakistan
+- **Each tax year has different brackets** - significant relief provided in 2025-26
 - Calculations are based on standard tax brackets and may not include:
   - Special deductions (insurance, investments, etc.)
   - Professional allowances
   - Other complex tax scenarios
 - For detailed tax planning, consult a tax professional
 - Tax rates are subject to change by government policies
+- The calculator uses the progressive tax system with fixed tax components for accurate results
 
 ## 📞 Support
 

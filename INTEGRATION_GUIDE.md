@@ -173,12 +173,14 @@ The calculator is already mobile-responsive, but you can enhance it:
 
 ### Test Different Scenarios
 ```javascript
-// Test cases to verify calculations
+// Test cases to verify calculations for 2025-26
 const testCases = [
-    { salary: 50000, expectedTax: 0 },      // Below threshold
-    { salary: 100000, expectedTax: 15000 }, // Basic rate
-    { salary: 200000, expectedTax: 40000 }, // Higher rate
+    { salary: 50000, expectedTax: 0 },        // Below threshold
+    { salary: 100000, expectedTax: 6000 },    // 1.2M yearly = Rs 6,000 annual tax
+    { salary: 200000, expectedTax: 142000 },  // 2.4M yearly = Rs 142,000 annual tax
 ];
+
+// Different years will have different tax amounts for same salary
 ```
 
 ### Browser Testing
