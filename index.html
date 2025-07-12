@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Withholding Tax Calculator - Property Income Pakistan 2025-2026</title>
+    <meta name="description" content="Calculate withholding tax on rental income and property transactions in Pakistan for tax years 2023-24, 2024-25, and 2025-26. Free online calculator with updated rates.">
+    <meta name="keywords" content="withholding tax calculator, property tax Pakistan, rental income tax, FBR tax rates, Pakistan tax calculator">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1><i class="fas fa-calculator"></i> Pakistan Tax Calculator</h1>
+                    <p>Withholding Tax on Property Income</p>
+                </div>
+                <nav class="nav">
+                    <a href="#calculator">Calculator</a>
+                    <a href="#rates">Tax Rates</a>
+                    <a href="#guide">Guide</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <section class="hero">
+                <h2>Withholding Tax Calculator for Property Income</h2>
+                <p>Calculate withholding tax on rental income and property transactions in Pakistan for tax years 2023-24, 2024-25, and 2025-26</p>
+            </section>
+
+            <section id="calculator" class="calculator-section">
+                <div class="calculator-container">
+                    <div class="calculator-header">
+                        <h3><i class="fas fa-home"></i> Property Income Tax Calculator</h3>
+                        <p>Select tax year and enter your property details to calculate withholding tax</p>
+                    </div>
+
+                    <div class="calculator-form">
+                        <div class="form-group">
+                            <label for="taxYear">Tax Year</label>
+                            <select id="taxYear" class="form-control">
+                                <option value="2025-26">2025-2026</option>
+                                <option value="2024-25">2024-2025</option>
+                                <option value="2023-24">2023-2024</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="taxpayerStatus">Taxpayer Status</label>
+                            <select id="taxpayerStatus" class="form-control">
+                                <option value="filer">Filer (Active Taxpayer List)</option>
+                                <option value="late-filer">Late Filer</option>
+                                <option value="non-filer">Non-Filer</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="incomeType">Income Type</label>
+                            <select id="incomeType" class="form-control">
+                                <option value="rental">Rental Income</option>
+                                <option value="property-sale">Property Sale</option>
+                                <option value="property-purchase">Property Purchase</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="propertyValue">Property Value / Annual Rental Income (PKR)</label>
+                            <input type="number" id="propertyValue" class="form-control" placeholder="Enter amount in PKR" min="0">
+                        </div>
+
+                        <div class="form-group property-sale-fields" style="display: none;">
+                            <label for="propertyType">Property Type</label>
+                            <select id="propertyType" class="form-control">
+                                <option value="residential">Residential</option>
+                                <option value="commercial">Commercial</option>
+                            </select>
+                        </div>
+
+                        <button type="button" id="calculateBtn" class="btn btn-primary">
+                            <i class="fas fa-calculator"></i> Calculate Tax
+                        </button>
+                    </div>
+
+                    <div id="results" class="results-section" style="display: none;">
+                        <h4><i class="fas fa-chart-line"></i> Tax Calculation Results</h4>
+                        <div class="result-cards">
+                            <div class="result-card">
+                                <div class="result-label">Taxable Amount</div>
+                                <div class="result-value" id="taxableAmount">PKR 0</div>
+                            </div>
+                            <div class="result-card">
+                                <div class="result-label">Tax Rate</div>
+                                <div class="result-value" id="taxRate">0%</div>
+                            </div>
+                            <div class="result-card highlight">
+                                <div class="result-label">Withholding Tax</div>
+                                <div class="result-value" id="withholdingTax">PKR 0</div>
+                            </div>
+                            <div class="result-card">
+                                <div class="result-label">Net Amount</div>
+                                <div class="result-value" id="netAmount">PKR 0</div>
+                            </div>
+                        </div>
+                        <div class="calculation-breakdown">
+                            <h5>Calculation Breakdown</h5>
+                            <div id="breakdownDetails"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="rates" class="rates-section">
+                <h3><i class="fas fa-table"></i> Current Tax Rates</h3>
+                <div class="rates-tabs">
+                    <button class="tab-btn active" data-year="2025-26">2025-2026</button>
+                    <button class="tab-btn" data-year="2024-25">2024-2025</button>
+                    <button class="tab-btn" data-year="2023-24">2023-2024</button>
+                </div>
+                <div class="rates-content">
+                    <div class="rate-tables">
+                        <div class="rate-table-container">
+                            <h4>Rental Income Tax Rates</h4>
+                            <table class="rate-table">
+                                <thead>
+                                    <tr>
+                                        <th>Annual Rental Income (PKR)</th>
+                                        <th>Filer Rate</th>
+                                        <th>Non-Filer Rate</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="rentalRatesTable">
+                                    <!-- Populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="rate-table-container">
+                            <h4>Property Transaction Tax Rates</h4>
+                            <table class="rate-table">
+                                <thead>
+                                    <tr>
+                                        <th>Property Value (PKR)</th>
+                                        <th>Transaction Type</th>
+                                        <th>Filer Rate</th>
+                                        <th>Non-Filer Rate</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="propertyRatesTable">
+                                    <!-- Populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="guide" class="guide-section">
+                <h3><i class="fas fa-book"></i> Tax Guide</h3>
+                <div class="guide-content">
+                    <div class="guide-cards">
+                        <div class="guide-card">
+                            <div class="guide-icon">
+                                <i class="fas fa-user-check"></i>
+                            </div>
+                            <h4>Filer vs Non-Filer</h4>
+                            <p>Filers are taxpayers on the Active Taxpayer List (ATL) who file regular tax returns. Non-filers face higher tax rates to encourage compliance.</p>
+                        </div>
+                        <div class="guide-card">
+                            <div class="guide-icon">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <h4>Rental Income Tax</h4>
+                            <p>Withholding tax is deducted at source on rental payments. Rates vary based on annual rental income and taxpayer status.</p>
+                        </div>
+                        <div class="guide-card">
+                            <div class="guide-icon">
+                                <i class="fas fa-exchange-alt"></i>
+                            </div>
+                            <h4>Property Transactions</h4>
+                            <p>Advance tax applies to property sales and purchases. Rates depend on property value and taxpayer status.</p>
+                        </div>
+                        <div class="guide-card">
+                            <div class="guide-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <h4>Tax Compliance</h4>
+                            <p>Maintain proper records and file returns on time. Withholding tax can be adjusted against annual tax liability.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="faq" class="faq-section">
+                <h3><i class="fas fa-question-circle"></i> Frequently Asked Questions</h3>
+                <div class="faq-content">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>What is withholding tax on property income?</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Withholding tax is advance income tax deducted at source on rental income and property transactions. It's collected by the payer and deposited with FBR on behalf of the taxpayer.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>How are tax rates different for filers and non-filers?</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Filers (taxpayers on ATL) pay lower rates, while non-filers face higher rates. This encourages tax compliance and regular filing of returns.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>Can withholding tax be adjusted in annual returns?</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, withholding tax can be adjusted against your annual tax liability when filing income tax returns. Excess tax paid can be claimed as refund.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>What records should I maintain for property income?</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Keep rental agreements, receipts, withholding tax certificates, property documents, and maintenance expense records for proper tax compliance.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Pakistan Tax Calculator</h4>
+                    <p>Free online tax calculators for Pakistan. Calculate income tax, withholding tax, and property tax with updated rates.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#calculator">Tax Calculator</a></li>
+                        <li><a href="#rates">Tax Rates</a></li>
+                        <li><a href="#guide">Tax Guide</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Disclaimer</h4>
+                    <p>This calculator is for informational purposes only. Please consult with a tax professional for official tax advice.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Pakistan Tax Calculator. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
